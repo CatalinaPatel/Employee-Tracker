@@ -1,3 +1,4 @@
+//Dependencies
 const mysql = require("mysql");
 const inquirer = requirer("inquirer");
 const consoleTable = require("console.table");
@@ -19,6 +20,7 @@ connection.connect(function (err) {
     startScreen();
 });
 
+//Initial user information
 function startScreen() {
     inquirer
         .prompt({
@@ -74,7 +76,7 @@ function startScreen() {
         });
 }
 
-
+//Items function
 function addDepartment() {
 
     inquirer.prompt({
@@ -101,5 +103,42 @@ function updateEmployee() {
                 message: "Which employee information would you like to update?",
                 name: "employeeUpdate"
             },
+
+            {
+                type: "input",
+                message: "What role do you want to update it to?",
+                name: "updateRole"
+            }
         ])
+
+        .then(function (answer) {
+            connection.query('UPDATE employee SET role_id=? WHERE first_name= ?', [answer.updateRole, answer.eeUpdate], function (err, res) {
+                if (err) throw err;
+                console.table(res);
+                startScreen();
+            });
+        });
+}
+
+function viewDepartment() {
+    let query = "SELECT * FROM department";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        startScreen();
+    });
+}
+
+function viewEmployees() {
+    let query = "SELECT * FROM employee";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        startScreen();
+    });
+}
+
+function Exit() {
+    connection.end();
+    process.exit();
 }
