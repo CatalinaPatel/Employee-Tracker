@@ -1,6 +1,6 @@
 //Dependencies
 const mysql = require("mysql");
-const inquirer = requirer("inquirer");
+const inquirer = require("inquirer");
 const consoleTable = require("console.table");
 const db = require(".");
 const { start } = require("repl");
