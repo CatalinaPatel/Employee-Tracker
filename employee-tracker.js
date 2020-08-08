@@ -1,15 +1,13 @@
 //Dependencies
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const consoleTable = require("console.table");
+require("console.table");
 const db = require(".");
-const { start } = require("repl");
-const { allowedNodeEnvironmentFlags } = require("process");
 
 
 const connection = mysql.createConnection({
     host: "localhost",
-    port: 8080,
+    port: "8080",
     user: "root",
     password: "root",
     database: "employeeTracker_db"
