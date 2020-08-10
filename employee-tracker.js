@@ -1,15 +1,13 @@
 //Dependencies
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-require("console.table");
-const db = require(".");
-
+//require("console.table");
 
 const connection = mysql.createConnection({
     host: "localhost",
-    port: "8080",
+    port: "3306",
     user: "root",
-    password: "root",
+    password: "SoBlessed2020!",
     database: "employeeTracker_db"
 });
 
@@ -80,8 +78,8 @@ function addDepartment() {
     inquirer.prompt({
 
         type: "input",
-        message: "What is the Deaprtment name?",
-        name: "depName"
+        message: "What is the Department name?",
+        name: "deptName"
 
     }).then(function (answer) {
 
@@ -91,6 +89,9 @@ function addDepartment() {
             startScreen()
         });
     });
+}
+function addRole() {
+    connection.query("SELECT * FROM department", function (err, data) { console.log(data) })
 }
 
 function updateEmployee() {
